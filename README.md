@@ -1,49 +1,11 @@
-#include "MainWindow.h"
-#include "JsonConfigManager.h"
-#include <qdebug.h>
+#JsonConfigManager 是一个很让你很轻松读写json 配置信息的类，用QT c++编写
 
-QString ConfigFilePath()
-{
-	return QApplication::applicationDirPath() + "/appconfig/config.json";
-}
+##您只要在项目中引入JsonConfigManager.h JsonCofigManager.cpp 就可以轻松使用这个类
 
 
+###写入例子演示
 
-
-
-
-#pragma region ����̳���ʾ
-class ConfigManager :public JsonConfigManager
-{
-
-public:
-	ConfigManager(QString jsonfilepath) :JsonConfigManager(jsonfilepath)
-	{
-
-	}
-
-public:
-	void SetUserName(QString username)
-	{
-		SetGroupKeyValue("bilibili", "username", username);
-	}
-	QString GetUserName()
-	{
-		return	GetGroupKeyValue("bilibili", "username");
-	}
-
-
-};
-#pragma endregion
-
-
-
-
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindowClass())
-{
-    ui->setupUi(this);
+```c++
 
 	connect(ui->pushButton_2, &QPushButton::clicked, this, [&]() {
 	
@@ -57,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
 		QString chromedriver = ui->lineEdit_3->text();
 		QString chromeuserdir = ui->lineEdit_4->text();
 
-		//config.SetGroupKeyValue("bilibibli", "username", QString::fromLocal8Bit("C����Ҳ�ܸɴ���"));
+		//config.SetGroupKeyValue("bilibibli", "username", QString::fromLocal8Bit("C语言也能干大事"));
 		//config.SetGroupKeyValue("bilibibli", "password", QString::fromLocal8Bit("123123"));
 
 		config.SetGroupKeyValue("bilibibli", "username", username);
@@ -73,6 +35,13 @@ MainWindow::MainWindow(QWidget *parent)
 	
 	});
 
+
+```
+
+
+###读入例子演示
+
+```c++
 
 	connect(ui->pushButton, &QPushButton::clicked, this, [&]() {
 
@@ -96,11 +65,4 @@ MainWindow::MainWindow(QWidget *parent)
 	});
 
 
-
-
-}
-
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
+```
